@@ -1,0 +1,41 @@
+<%= stylesheet_link_tag "application" %>
+<h1>Update Your Purchase Items</h1>
+<%= form_with model: @archive,url:"/archives" ,local: true do |form| %>
+  <p>
+   <b><%= form.label :place ,'Purchase place:'%></b>
+    <%= form.text_field :place %>
+  </p>
+
+  <p>
+    <b><%= form.label :purchase_date ,'Purchase date:' %></b>
+    <%= form.date_field :purchase_date %>
+  </p>
+
+<table>
+  <% if !@items.blank? %>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Brand</th>
+      <th>Image</th>
+    </tr>
+  <% end %>
+  <% if @items.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= form.text_field :price ,multiple:true%></td>
+      <td><%= form.text_field :brand, multiple:true%></td>
+      <td><%= form.file_field :image ,multiple:true , name: "image[#{item.name}]"%></td>
+      <%end %>
+    </tr>
+      <% if @items.blank? %>
+        <h2>Your List is Empty! There is nothing to update! </h2>
+      <% end %>
+  <% end %>
+</table>
+<br>
+ <%= form.submit 'Add to Archive' %>
+<% end %>
+<br>
+<%= link_to 'Back', welcome_index_path %>
+

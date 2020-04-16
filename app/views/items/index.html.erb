@@ -1,0 +1,27 @@
+<h1>Shopping List</h1>
+<table>
+<% if !@items.blank? %>
+<tr>
+  <th>Name</th>
+  <th>Details</th>
+</tr>
+ <% end%>
+  <% if @items.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= item.details %></td>
+      <td><%= link_to 'Edit', edit_item_path(item) %></td>
+      <td><%= link_to 'Delete', item_path(item),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end.empty? %>
+     <h2>Your List is Empty! Add item to  the list by the link below</h2>
+  <% end %>
+</table>
+<br>
+<b>Add New Item:</b>
+<%= render 'form' %>
+
+<br/>
+<%= link_to 'Back', welcome_index_path %>

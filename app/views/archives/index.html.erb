@@ -1,0 +1,30 @@
+<%= stylesheet_link_tag "archives" %>
+<h1>Archive</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Brand</th>
+    <th>Image</th>
+    <th>Purchase Date</th>
+    <th>Place</th>
+  </tr>
+  <% if @archives.each do |archive| %>
+    <tr>
+      <td><%= archive.name %></td>
+      <td><%= archive.price %></td>
+      <td><%= archive.brand %></td>
+      <td><%= link_to image_tag(archive.image ,size: '200x150'), archive.image   %></td>
+      <td><%= archive.purchase_date %></td>
+      <td><%= archive.place %></td>
+      <td><%= link_to 'Delete', archive_path(archive),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end.empty? %>
+    <h2>Your Archive is Empty! </h2>
+  <% end %>
+</table>
+<br>
+
+<%= link_to 'Back',welcome_index_path %>
